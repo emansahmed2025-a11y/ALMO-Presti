@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALMO Prestige — Engineered for Prestige</title>
+<meta name="description" content="ALMO Prestige — luxury engineered eyewear. Titanium structures, numbered editions.">
+<script>
+/* Apply saved language before first paint to avoid an RTL flash */
+(function(){try{var l=localStorage.getItem('almo-lang');if(!l){l=(navigator.language||'en').toLowerCase().indexOf('ar')===0?'ar':'en';}document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&family=Amiri:wght@400;700&family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#home" class="brand" aria-label="ALMO Prestige">
+      <span class="brand-name">ALMO</span>
+      <span class="brand-sub">PRESTIGE</span>
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <a class="nav-link" href="#home" data-en="HOME" data-ar="الرئيسية">HOME</a>
+      <a class="nav-link" href="#eyewear" data-en="EYEWEAR" data-ar="النظارات">EYEWEAR</a>
+      <a class="nav-link" href="#collections" data-en="COLLECTIONS" data-ar="المجموعات">COLLECTIONS</a>
+      <a class="nav-link" href="#limited" data-en="LIMITED EDITION" data-ar="الإصدارات المحدودة">LIMITED EDITION</a>
+      <a class="nav-link" href="#about" data-en="ABOUT" data-ar="من نحن">ABOUT</a>
+      <a class="nav-link" href="#contact" data-en="CONTACT" data-ar="تواصل معنا">CONTACT</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+      </button>
+      <button class="icon-btn lang-btn" id="langBtn"><span data-en="عربي" data-ar="English">عربي</span></button>
+      <button class="icon-btn cart-btn" id="cartBtn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M5.5 8h13l-1.2 13H6.7L5.5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+      <button class="icon-btn burger" id="burgerBtn" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav aria-label="Mobile">
+    <a class="mm-link" href="#home"><span class="mm-num">01</span><span data-en="HOME" data-ar="الرئيسية">HOME</span></a>
+    <a class="mm-link" href="#eyewear"><span class="mm-num">02</span><span data-en="EYEWEAR" data-ar="النظارات">EYEWEAR</span></a>
+    <a class="mm-link" href="#collections"><span class="mm-num">03</span><span data-en="COLLECTIONS" data-ar="المجموعات">COLLECTIONS</span></a>
+    <a class="mm-link" href="#limited"><span class="mm-num">04</span><span data-en="LIMITED EDITION" data-ar="الإصدارات المحدودة">LIMITED EDITION</span></a>
+    <a class="mm-link" href="#about"><span class="mm-num">05</span><span data-en="ABOUT" data-ar="من نحن">ABOUT</span></a>
+    <a class="mm-link" href="#contact"><span class="mm-num">06</span><span data-en="CONTACT" data-ar="تواصل معنا">CONTACT</span></a>
+  </nav>
+  <p class="mm-foot" data-en="ALMO PRESTIGE — ENGINEERED FOR PRESTIGE" data-ar="ألـمو برستيج — صُممت للتميز">ALMO PRESTIGE — ENGINEERED FOR PRESTIGE</p>
+</div>
+
+<!-- search overlay -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
+  <button class="modal-close" id="searchClose" aria-label="Close search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <div class="search-inner">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+      <input id="searchInput" type="search" autocomplete="off" data-en-ph="SEARCH THE ARCHIVE" data-ar-ph="ابحث في الأرشيف" placeholder="SEARCH THE ARCHIVE">
+    </div>
+    <p class="search-hint" data-en="TYPE TO SEARCH — ESC TO CLOSE" data-ar="اكتب للبحث — ESC للإغلاق">TYPE TO SEARCH — ESC TO CLOSE</p>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+  <div class="hero-bg-wrap">
+    <img class="hero-bg" id="heroBg" fetchpriority="high"
+      src="https://z-cdn-media.chatglm.cn/files/0b26c663-3744-4ce5-be22-c0a43e6bb0d9.png?auth_key=1888474716-53caf225ab7a4380ad682da98c6a01da-0-335c3ce44912d51f78e2b1e9c3c97514"
+      alt="ALMO Architect sunglasses resting on a drafting table with blueprints and drafting tools">
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="hero-grid"></div>
+
+  <svg class="hero-callout" viewBox="0 0 260 110" aria-hidden="true">
+    <circle cx="10" cy="18" r="3.5"/>
+    <path class="draw" d="M10 18 H170 V78"/>
+    <circle cx="170" cy="78" r="3.5"/>
+    <text x="24" y="10">GRADE-5 TITANIUM</text>
+    <text x="24" y="42">24 g — ±0.1 mm</text>
+  </svg>
+
+  <div class="wrap hero-content">
+    <p class="hero-kicker"><span class="k-rule"></span><span data-en="ALMO PRESTIGE — HAUTE EYEWEAR" data-ar="ألـمو برستيج — نظارات فاخرة">ALMO PRESTIGE — HAUTE EYEWEAR</span></p>
+    <h1 class="hero-title">
+      <span data-en="ENGINEERED FOR" data-ar="صُممت">ENGINEERED FOR</span>
+      <span class="ht-gold" data-en="PRESTIGE." data-ar="للتميز.">PRESTIGE.</span>
+    </h1>
+    <p class="hero-sub" data-en="Eyewear drafted like architecture — titanium structures, numbered editions, and a finish that belongs to the few." data-ar="نظارات تُصمّم كما تُصمّم العمارة — هياكل من التيتانيوم، وإصدارات مرقّمة، ولمسة نهائية تليق بالنخبة.">Eyewear drafted like architecture — titanium structures, numbered editions, and a finish that belongs to the few.</p>
+    <div class="hero-cta">
+      <a href="#collections" class="btn btn-solid" data-en="DISCOVER THE COLLECTION" data-ar="اكتشف المجموعة">DISCOVER THE COLLECTION</a>
+      <a href="#shop" class="btn" data-en="SHOP NOW" data-ar="تسوق الآن">SHOP NOW</a>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="wrap">
+      <span class="hero-coord">24.7136° N — 46.6753° E</span>
+      <span class="hero-scroll"><span data-en="SCROLL" data-ar="مرّر">SCROLL</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
+      </span>
+      <span class="hero-edition" data-en="TITANIUM SERIES — Nº 01" data-ar="سلسلة التيتانيوم — رقم 01">TITANIUM SERIES — Nº 01</span>
+    </div>
+  </div>
+</section>
+
+<!-- brand ticker -->
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="sec about">
+  <span class="cross cross-tl"></span><span class="cross cross-br"></span>
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">01</span><span class="sec-rule"></span><span data-en="THE MAISON" data-ar="الدار">THE MAISON</span></p>
+      <h2 class="sec-title">
+        <span data-en="WHERE ENGINEERING" data-ar="حيث تلتقي الهندسة">WHERE ENGINEERING</span>
+        <span data-en="MEETS LUXURY." data-ar="بالرفاهية.">MEETS LUXURY.</span>
+      </h2>
+    </header>
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="lead" data-en="ALMO Prestige treats a frame the way an architect treats a façade — nothing decorative survives unless it carries a load. Every silhouette begins as a technical drawing, is stress-tested in CAD, and only then earns the right to be cut from titanium." data-ar="تتعامل دار ألـمو برستيج مع إطار النظارة كما يتعامل المعماري مع واجهة مبنى — لا يبقى أي عنصر جمالي إلا إذا كان يحمل وظيفة بنيوية. كل تصميم يبدأ مخططاً هندسياً، ويُختبر إنشائياً على الحاسوب، وعندها فقط يكتسب الحق في أن يُقتطع من التيتانيوم.">ALMO Prestige treats a frame the way an architect treats a façade — nothing decorative survives unless it carries a load. Every silhouette begins as a technical drawing, is stress-tested in CAD, and only then earns the right to be cut from titanium.</p>
+        <p data-en="The maison was founded on a single conviction: luxury is not ornament, it is tolerance. A hinge that outlives its owner, a finish applied in eleven passes, a serial number engraved where only you will find it." data-ar="قامت الدار على قناعة واحدة: الفخامة ليست زخرفة، بل دقة. مفصلة تتجاوز عمر مالكها، ولمسة نهائية تُطبَّق على إحدى عشرة مراحل، ورقم تسلسلي محفور في مكان لا يعرفه إلا أنت.">The maison was founded on a single conviction: luxury is not ornament, it is tolerance. A hinge that outlives its owner, a finish applied in eleven passes, a serial number engraved where only you will find it.</p>
+      </div>
+      <figure class="about-media reveal">
+        <img loading="lazy" decoding="async"
+          src="https://z-cdn-media.chatglm.cn/files/ca4e7671-9f55-43f1-b0d7-774bdf30597c.jpg?auth_key=1888474716-b25bdc1f53d24f10bb3ffa2a0fac9325-0-f6cc4de4dedf7748cb2a44a90e428bb1"
+          alt="ALMO Prestige atelier stationery and eyewear on marble">
+        <figcaption class="fig-cap" data-en="FIG. 01 — THE ATELIER STANDARD" data-ar="شكل 01 — معيار المشغل">FIG. 01 — THE ATELIER STANDARD</figcaption>
+      </figure>
+    </div>
+    <ul class="stat-line reveal">
+      <li><strong>120+</strong><span data-en="HAND-FINISHING STEPS" data-ar="خطوة تشطيب يدوي">HAND-FINISHING STEPS</span></li>
+      <li><strong>±0.1 mm</strong><span data-en="MACHINING TOLERANCE" data-ar="تفاوت التصنيع">MACHINING TOLERANCE</span></li>
+      <li><strong>25</strong><span data-en="PIECES PER LIMITED EDITION" data-ar="قطعة في الإصدار المحدود">PIECES PER LIMITED EDITION</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= EYEWEAR ================= -->
+<section id="eyewear" class="sec eyewear">
+  <div class="wrap eyewear-grid">
+    <div class="eyewear-copy">
+      <header class="sec-head reveal">
+        <p class="sec-label"><span class="mono">02</span><span class="sec-rule"></span><span data-en="THE EYEWEAR" data-ar="النظارات">THE EYEWEAR</span></p>
+        <h2 class="sec-title">
+          <span data-en="FRAMES" data-ar="إطارات">FRAMES</span>
+          <span data-en="WITH INTENT." data-ar="ذات غاية.">WITH INTENT.</span>
+        </h2>
+      </header>
+      <p class="sec-sub reveal" data-en="Three doctrines, one discipline. Each line below is a complete design language — open its technical file." data-ar="ثلاث مدارس، وانضباط واحد. كل خط أدناه يمثل لغة تصميم متكاملة — افتح ملفه الفني.">Three doctrines, one discipline. Each line below is a complete design language — open its technical file.</p>
+      <ol class="frame-index reveal" id="frameIndex"></ol>
+      <div class="eyewear-cta reveal">
+        <a href="#shop" class="btn" data-en="ENTER THE CATALOGUE" data-ar="ادخل إلى الكتالوج">ENTER THE CATALOGUE</a>
+      </div>
+    </div>
+    <figure class="eyewear-media reveal">
+      <span class="cross cross-tl"></span><span class="cross cross-br"></span>
+      <img loading="lazy" decoding="async"
+        src="https://z-cdn-media.chatglm.cn/files/547443d1-8f50-49f4-b90c-eee1f04692f4.png?auth_key=1888474716-520ce2f03cb94eb4aa7fa9b75265add0-0-0611241ae7dabb1d5e273cde218b8bfa"
+        alt="ALMO Prestige eyewear worn in an engineering environment">
+      <figcaption class="fig-cap" data-en="FIG. 02 — WORN STUDY" data-ar="شكل 02 — دراسة الارتداء">FIG. 02 — WORN STUDY</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= SHOP / CATALOGUE ================= -->
+<section id="shop" class="sec shop">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">03</span><span class="sec-rule"></span><span data-en="THE CATALOGUE" data-ar="الكتالوج">THE CATALOGUE</span></p>
+      <h2 class="sec-title"><span data-en="THE" data-ar="الـ">THE</span><span data-en="COLLECTION." data-ar="مجموعة.">COLLECTION.</span></h2>
+      <p class="sec-sub" data-en="Machined, numbered and finished by hand. Filter by line, character or rarity." data-ar="مصنّعة بدقة، ومرقّمة، ومشطّبة يدوياً. صفِّها حسب الخط أو الطابع أو الندرة.">Machined, numbered and finished by hand. Filter by line, character or rarity.</p>
+    </header>
+    <div class="shop-toolbar reveal">
+      <div class="filters" id="filters">
+        <button class="chip is-active" data-filter="all" data-en="ALL" data-ar="الكل">ALL</button>
+        <button class="chip" data-filter="men" data-en="MEN" data-ar="رجالي">MEN</button>
+        <button class="chip" data-filter="women" data-en="WOMEN" data-ar="نسائي">WOMEN</button>
+        <button class="chip" data-filter="unisex" data-en="UNISEX" data-ar="يونيسكس">UNISEX</button>
+        <button class="chip" data-filter="signature" data-en="SIGNATURE" data-ar="سيجنتشر">SIGNATURE</button>
+        <button class="chip" data-filter="limited" data-en="LIMITED EDITION" data-ar="إصدار محدود">LIMITED EDITION</button>
+      </div>
+      <div class="shop-tools">
+        <label class="search-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+          <input id="shopSearch" type="search" autocomplete="off" data-en-ph="Search frames…" data-ar-ph="ابحث عن إطار…" placeholder="Search frames…">
+        </label>
+        <label class="sort-field">
+          <span data-en="SORT" data-ar="ترتيب">SORT</span>
+          <select id="shopSort">
+            <option value="featured" data-en="Featured" data-ar="مميّز">Featured</option>
+            <option value="price-asc" data-en="Price — low to high" data-ar="السعر — من الأقل">Price — low to high</option>
+            <option value="price-desc" data-en="Price — high to low" data-ar="السعر — من الأعلى">Price — high to low</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <p class="shop-count" id="shopCount"></p>
+    <div class="shop-grid" id="shopGrid"></div>
+    <div class="shop-empty" id="shopEmpty" hidden>
+      <p data-en="No frames match your current selection." data-ar="لا توجد إطارات مطابقة لاختيارك الحالي.">No frames match your current selection.</p>
+      <button class="btn btn-small" id="shopReset" data-en="RESET FILTERS" data-ar="إعادة الضبط">RESET FILTERS</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COLLECTIONS ================= -->
+<section id="collections" class="sec collections">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">04</span><span class="sec-rule"></span><span data-en="THE COLLECTIONS" data-ar="المجموعات">THE COLLECTIONS</span></p>
+      <h2 class="sec-title"><span data-en="THREE" data-ar="ثلاث">THREE</span><span data-en="DOCTRINES." data-ar="مدارس.">DOCTRINES.</span></h2>
+    </header>
+    <div class="col-grid reveal">
+      <a class="col-card col-a" href="#shop" data-collection="ARCHITECT">
+        <img loading="lazy" decoding="async"
+          src="https://z-cdn-media.chatglm.cn/files/0b26c663-3744-4ce5-be22-c0a43e6bb0d9.png?auth_key=1888474716-53caf225ab7a4380ad682da98c6a01da-0-335c3ce44912d51f78e2b1e9c3c97514"
+          alt="ALMO Architect collection">
+        <div class="col-veil"></div>
+        <div class="col-overlay">
+          <span class="col-num">C·01</span>
+          <h3 data-en="ARCHITECT" data-ar="أركيتكت">ARCHITECT</h3>
+          <p data-en="Structural browlines, flat planes, graphite finishes. The drafting table, worn." data-ar="خطوط جبين إنشائية، ومستويات مسطّحة، ولمسات جرافيت. طاولة التصميم، تُرتدى.">Structural browlines, flat planes, graphite finishes. The drafting table, worn.</p>
+          <span class="col-cta"><span data-en="EXPLORE" data-ar="استكشف">EXPLORE</span>
+            <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="col-card col-b" href="#shop" data-collection="VANGUARD">
+        <img loading="lazy" decoding="async"
+          src="https://z-cdn-media.chatglm.cn/files/80f632a7-66b8-4a27-b636-15d5149921a2.png?auth_key=1888474716-2624038dc29e405482719e1a0269cdbf-0-89fdc10385e99795d1e35a23e6016256"
+          alt="ALMO Vanguard collection">
+        <div class="col-veil"></div>
+        <div class="col-overlay">
+          <span class="col-num">C·02</span>
+          <h3 data-en="VANGUARD" data-ar="فانجارد">VANGUARD</h3>
+          <p data-en="Controlled tension and cantilevered silhouettes. For those who build the future." data-ar="شدٌّ محسوب وصور ظلّية ناتئة. لمن يبنون المستقبل.">Controlled tension and cantilevered silhouettes. For those who build the future.</p>
+          <span class="col-cta"><span data-en="EXPLORE" data-ar="استكشف">EXPLORE</span>
+            <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="col-card col-c" href="#shop" data-collection="HERITAGE">
+        <img loading="lazy" decoding="async"
+          src="https://z-cdn-media.chatglm.cn/files/8a98c7b3-0f71-4979-a6d5-ed54583faa8d.png?auth_key=1888474716-959e696564c246c8e940cda4511377-0-29fee5a3c8a59e3f2c74b09f541353d7"
+          alt="ALMO Heritage collection">
+        <div class="col-veil"></div>
+        <div class="col-overlay">
+          <span class="col-num">C·03</span>
+          <h3 data-en="HERITAGE" data-ar="هيريتاج">HERITAGE</h3>
+          <p data-en="Champagne-gold details on classic geometries. The archive, refined." data-ar="تفاصيل ذهبية شامبانيا على هندسيات كلاسيكية. الأرشيف، مصقولاً.">Champagne-gold details on classic geometries. The archive, refined.</p>
+          <span class="col-cta"><span data-en="EXPLORE" data-ar="استكشف">EXPLORE</span>
+            <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIMITED EDITION ================= -->
+<section id="limited" class="sec limited">
+  <div class="limited-frame">
+    <span class="cross cross-tl"></span><span class="cross cross-tr"></span>
+    <span class="cross cross-bl"></span><span class="cross cross-br"></span>
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="sec-label"><span class="mono">05</span><span class="sec-rule"></span><span data-en="LIMITED EDITION" data-ar="إصدار محدود">LIMITED EDITION</span></p>
+        <h2 class="sec-title"><span data-en="THE" data-ar="الإطار">THE</span><span data-en="VANGUARD." data-ar="«فانجارد».">VANGUARD.</span></h2>
+        <p class="sec-sub" data-en="TWENTY-FIVE PIECES. EVER." data-ar="خمس وعشرون قطعة. للأبد.">TWENTY-FIVE PIECES. EVER.</p>
+      </header>
+      <div class="limited-grid">
+        <figure class="limited-media reveal">
+          <img loading="lazy" decoding="async"
+            src="https://z-cdn-media.chatglm.cn/files/80f632a7-66b8-4a27-b636-15d5149921a2.png?auth_key=1888474716-2624038dc29e405482719e1a0269cdbf-0-89fdc10385e99795d1e35a23e6016256"
+            alt="ALMO Vanguard limited edition frame on black marble">
+          <figcaption class="fig-cap" data-en="FIG. 03 — PIECE Nº 001 / 025" data-ar="شكل 03 — القطعة رقم 001 / 025">FIG. 03 — PIECE Nº 001 / 025</figcaption>
+        </figure>
+        <div class="limited-copy reveal">
+          <p data-en="The Vanguard is cut from a single sheet of Grade-5 titanium and folded — not soldered — into form. Twenty-five pieces will exist. When the final piece is claimed, the drawing is retired to the archive and the mould is destroyed." data-ar="يُقتطع إطار «فانجارد» من صفيحة واحدة من تيتانيوم درجة 5، ثم يُطوى — لا يُلحم — ليتشكّل. سوجود في الوجود خمس وعشرون قطعة فقط. وعندما تُستحوذ على القطعة الأخيرة، يُودَع المخطط في الأرشيف ويُدمَّر القالب.">The Vanguard is cut from a single sheet of Grade-5 titanium and folded — not soldered — into form. Twenty-five pieces will exist. When the final piece is claimed, the drawing is retired to the archive and the mould is destroyed.</p>
+          <p class="cert" data-en="Each piece is individually numbered on the inner temple and accompanied by a numbered certificate of authenticity." data-ar="كل قطعة تحمل رقماً تسلسلياً محفوراً على الساق الداخلية، وترافقها شهادة أصالة مرقّمة.">Each piece is individually numbered on the inner temple and accompanied by a numbered certificate of authenticity.</p>
+          <div class="pieces" id="pieceBoard" role="listbox" aria-label="Piece availability"></div>
+          <p class="piece-hint" data-en="Select an open number to reserve that exact piece." data-ar="اختر رقماً متاحاً لحجز تلك القطعة بالتحديد.">Select an open number to reserve that exact piece.</p>
+          <p class="piece-status" id="pieceStatus"></p>
+          <div class="limited-cta">
+            <button class="btn btn-solid" data-open-product="2" data-en="RESERVE A PIECE" data-ar="احجز قطعتك">RESERVE A PIECE</button>
+            <button class="btn" data-open-product="2" data-en="VIEW THE FRAME" data-ar="شاهد الإطار">VIEW THE FRAME</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESIGN & ENGINEERING ================= -->
+<section id="engineering" class="sec engineering">
+  <div class="wrap eng-grid">
+    <div class="eng-copy">
+      <header class="sec-head reveal">
+        <p class="sec-label"><span class="mono">06</span><span class="sec-rule"></span><span data-en="DESIGN &amp; ENGINEERING" data-ar="التصميم والهندسة">DESIGN &amp; ENGINEERING</span></p>
+        <h2 class="sec-title"><span data-en="MEASURED TO" data-ar="ندقق حتى">MEASURED TO</span><span data-en="A TENTH." data-ar="عُشر المليمتر.">A TENTH.</span></h2>
+      </header>
+      <div class="eng-tabs reveal" id="engTabs"></div>
+      <div class="eng-panel" id="engPanel"></div>
+    </div>
+    <figure class="eng-media reveal">
+      <span class="cross cross-tl"></span><span class="cross cross-br"></span>
+      <img loading="lazy" decoding="async"
+        src="https://z-cdn-media.chatglm.cn/files/5c098e7a-ff54-46d8-a461-9db51121be21.png?auth_key=1888474716-56f95c25db6c4e8186f6728f11083e8b-0-ad560439db1d8cc1cb5d38fe406ac6ab"
+        alt="ALMO Monolith frame — material study on black marble">
+      <div class="dim dim-h"><span class="dim-line"></span><span class="dim-val">145 mm</span><span class="dim-line"></span></div>
+      <div class="dim dim-v"><span class="dim-line"></span><span class="dim-val">24 g</span><span class="dim-line"></span></div>
+      <figcaption class="fig-cap" data-en="FIG. 04 — MATERIAL STUDY" data-ar="شكل 04 — دراسة المواد">FIG. 04 — MATERIAL STUDY</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= WHY ALMO ================= -->
+<section id="why" class="sec why">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">07</span><span class="sec-rule"></span><span data-en="WHY ALMO" data-ar="لماذا ألـمو">WHY ALMO</span></p>
+      <h2 class="sec-title"><span data-en="THE CASE" data-ar="لماذا">THE CASE</span><span data-en="FOR PRESTIGE." data-ar="ألـمو.">FOR PRESTIGE.</span></h2>
+    </header>
+    <ol class="why-list">
+      <li class="reveal"><span class="why-num mono">01</span>
+        <div class="why-body"><h3 data-en="Precision Engineering" data-ar="هندسة دقيقة">Precision Engineering</h3>
+        <p data-en="Frames are drafted in CAD to a tenth of a millimetre before a single chip of titanium is cut." data-ar="تُرسم الإطارات على الحاسوب بدقة عُشر المليمتر قبل اقتطاع أول شظية تيتانيوم.">Frames are drafted in CAD to a tenth of a millimetre before a single chip of titanium is cut.</p></div>
+        <span class="why-tag mono">±0.1 MM</span></li>
+      <li class="reveal"><span class="why-num mono">02</span>
+        <div class="why-body"><h3 data-en="Rare Materials" data-ar="مواد نادرة">Rare Materials</h3>
+        <p data-en="Grade-5 titanium, Japanese acetate and lenses polished on seven faces." data-ar="تيتانيوم درجة 5، وأسيتات ياباني، وعدسات مصقولة على سبعة أوجه.">Grade-5 titanium, Japanese acetate and lenses polished on seven faces.</p></div>
+        <span class="why-tag mono">GRADE-5 Ti</span></li>
+      <li class="reveal"><span class="why-num mono">03</span>
+        <div class="why-body"><h3 data-en="Hand-Finished" data-ar="تشطيب يدوي">Hand-Finished</h3>
+        <p data-en="More than one hundred and twenty finishing steps pass through human hands." data-ar="أكثر من مئة وعشرين خطوة تشطيب تمرّ عبر الأيدي البشرية.">More than one hundred and twenty finishing steps pass through human hands.</p></div>
+        <span class="why-tag mono">120+ STEPS</span></li>
+      <li class="reveal"><span class="why-num mono">04</span>
+        <div class="why-body"><h3 data-en="Numbered Provenance" data-ar="أصل موثّق">Numbered Provenance</h3>
+        <p data-en="Limited pieces carry engraved serials and matching certificates of authenticity." data-ar="القطع المحدودة تحمل أرقاماً محفورة وشهادات أصالة مطابقة.">Limited pieces carry engraved serials and matching certificates of authenticity.</p></div>
+        <span class="why-tag mono">Nº 001–025</span></li>
+      <li class="reveal"><span class="why-num mono">05</span>
+        <div class="why-body"><h3 data-en="Lifetime Service" data-ar="خدمة مدى الحياة">Lifetime Service</h3>
+        <p data-en="Complimentary adjustments, torque checks and refinishing for the life of the frame." data-ar="تعديلات وفحوص و إعادة تلميع مجانية طوال عمر الإطار.">Complimentary adjustments, torque checks and refinishing for the life of the frame.</p></div>
+        <span class="why-tag mono">LIFETIME</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery" class="sec gallery">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">08</span><span class="sec-rule"></span><span data-en="GALLERY" data-ar="المعرض">GALLERY</span></p>
+      <h2 class="sec-title"><span data-en="THE" data-ar="الـ">THE</span><span data-en="ARCHIVE." data-ar="أرشيف.">ARCHIVE.</span></h2>
+      <p class="sec-sub" data-en="Frames, studies and the objects around them. Select any plate to view it." data-ar="إطارات، ودراسات، والأشياء من حولها. اختر أي لوحة لعرضها.">Frames, studies and the objects around them. Select any plate to view it.</p>
+    </header>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- ================= GIFT SETS ================= -->
+<section id="gift-sets" class="sec gift">
+  <div class="wrap gift-grid">
+    <figure class="gift-media reveal">
+      <img loading="lazy" decoding="async"
+        src="https://z-cdn-media.chatglm.cn/files/003fc5de-5f7b-4882-aade-2361fa160b8a.jpg?auth_key=1888474716-ed3d5682706c40799a75cd58e9d51b63-0-e58d0204917e1530e7176c5b53fb102e"
+        alt="ALMO Prestige gift packaging — cases, box, ribbon and shopping bag">
+      <figcaption class="fig-cap" data-en="FIG. 05 — THE PRESENTATION SYSTEM" data-ar="شكل 05 — منظومة التقديم">FIG. 05 — THE PRESENTATION SYSTEM</figcaption>
+    </figure>
+    <div class="gift-body">
+      <header class="sec-head reveal">
+        <p class="sec-label"><span class="mono">09</span><span class="sec-rule"></span><span data-en="GIFT SETS" data-ar="أطقم الهدايا">GIFT SETS</span></p>
+        <h2 class="sec-title"><span data-en="THE GIFT," data-ar="هدية">THE GIFT,</span><span data-en="ENGINEERED." data-ar="مُهندسة.">ENGINEERED.</span></h2>
+        <p class="sec-sub" data-en="The object is only half the gesture. Each set is boxed, ribboned and sealed by hand, with the certificate resting on top." data-ar="المنتج نصف الإيماءة فقط. كل طقم يُعبَّأ ويُربط بشريط ويُختم يدوياً، مع شهادة الأصالة في الأعلى.">The object is only half the gesture. Each set is boxed, ribboned and sealed by hand, with the certificate resting on top.</p>
+      </header>
+      <article class="gift-set reveal">
+        <span class="gs-num mono">GS·01</span>
+        <h3 data-en="Signature Gift Set" data-ar="طقم الهدايا السيجنتشر">Signature Gift Set</h3>
+        <p class="gs-inc" data-en="Any catalogue frame · leather case · certificate · microfibre cloth · ribboned presentation box" data-ar="أي إطار من الكتالوج · علبة جلدية · شهادة أصالة · قطعة تنظيف ميكروفايبر · علبة تقديم بشريط">Any catalogue frame · leather case · certificate · microfibre cloth · ribboned presentation box</p>
+        <div class="gs-row"><span class="gs-price" data-price="9"></span>
+          <button class="btn btn-small" data-add="9" data-en="ADD TO CART" data-ar="أضف للسلة">ADD TO CART</button></div>
+      </article>
+      <article class="gift-set reveal">
+        <span class="gs-num mono">GS·02</span>
+        <h3 data-en="Sovereign Gift Set" data-ar="طقم الهدايا سوفرين">Sovereign Gift Set</h3>
+        <p class="gs-inc" data-en="Any limited-edition frame · lacquered display case · numbered certificate · concierge hand-delivery" data-ar="أي إطار من الإصدار المحدود · علبة عرض مطلية · شهادة مرقّمة · تسليم خاص">Any limited-edition frame · lacquered display case · numbered certificate · concierge hand-delivery</p>
+        <div class="gs-row"><span class="gs-price" data-price="10"></span>
+          <button class="btn btn-small" data-add="10" data-en="ADD TO CART" data-ar="أضف للسلة">ADD TO CART</button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CARE GUIDE ================= -->
+<section id="care" class="sec care">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">10</span><span class="sec-rule"></span><span data-en="CARE GUIDE" data-ar="دليل العناية">CARE GUIDE</span></p>
+      <h2 class="sec-title"><span data-en="MAINTAIN THE" data-ar="حافظ">MAINTAIN THE</span><span data-en="STANDARD." data-ar="على المعيار.">STANDARD.</span></h2>
+    </header>
+    <ol class="care-list">
+      <li class="reveal"><span class="care-num mono">01</span><div>
+        <h3 data-en="Rinse First" data-ar="اغسل أولاً">Rinse First</h3>
+        <p data-en="Rinse frames in lukewarm water before wiping — dust is abrasive." data-ar="اغسل الإطار بماء فاتر قبل المسح — الغبار مادة كاشطة.">Rinse frames in lukewarm water before wiping — dust is abrasive.</p></div></li>
+      <li class="reveal"><span class="care-num mono">02</span><div>
+        <h3 data-en="The Right Cloth" data-ar="القطعة الصحيحة">The Right Cloth</h3>
+        <p data-en="Microfibre only. Shirts and tissues micro-scratch the coating." data-ar="قطعة الميكروفايبر فقط. القمصان والمناديل تخدش الطلاء خدوشاً دقيقة.">Microfibre only. Shirts and tissues micro-scratch the coating.</p></div></li>
+      <li class="reveal"><span class="care-num mono">03</span><div>
+        <h3 data-en="Heat Is the Enemy" data-ar="الحرارة هي العدو">Heat Is the Enemy</h3>
+        <p data-en="Never leave frames on a sunlit dashboard. Titanium survives; the lenses will not." data-ar="لا تترك النظارة على لوحة سيارة معرّضة للشمس. التيتانيوم يصمد، لكن العدسات لا.">Never leave frames on a sunlit dashboard. Titanium survives; the lenses will not.</p></div></li>
+      <li class="reveal"><span class="care-num mono">04</span><div>
+        <h3 data-en="Rest It Cased" data-ar="احفظها في علبتها">Rest It Cased</h3>
+        <p data-en="Store closed, temples folded, lenses facing up." data-ar="احفظها مغلقة، مع طيّ الساقين، والعدسات نحو الأعلى.">Store closed, temples folded, lenses facing up.</p></div></li>
+      <li class="reveal"><span class="care-num mono">05</span><div>
+        <h3 data-en="Periodic Torque Check" data-ar="فحص دوري للعزم">Periodic Torque Check</h3>
+        <p data-en="Bring the frame in once a year for a complimentary hinge check and re-torque." data-ar="أحضر الإطار مرة في السنة لفحص المفاصل وضبط عزم اللولب مجاناً.">Bring the frame in once a year for a complimentary hinge check and re-torque.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="sec faq">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="sec-label"><span class="mono">11</span><span class="sec-rule"></span><span data-en="QUESTIONS" data-ar="الأسئلة">QUESTIONS</span></p>
+      <h2 class="sec-title"><span data-en="FREQUENTLY" data-ar="أسئلة">FREQUENTLY</span><span data-en="ASKED." data-ar="متكررة.">ASKED.</span></h2>
+    </header>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ================= CHECKOUT ================= -->
+<section id="checkout" class="sec checkout" hidden>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-label"><span class="mono">12</span><span class="sec-rule"></span><span data-en="FINAL SPECIFICATION" data-ar="المواصفة النهائية">FINAL SPECIFICATION</span></p>
+      <h2 class="sec-title"><span data-en="CONFIRM YOUR" data-ar="أكّد">CONFIRM YOUR</span><span data-en="ORDER." data-ar="طلبك.">ORDER.</span></h2>
+    </header>
+    <div class="co-grid">
+      <form id="checkoutForm" class="form" novalidate>
+        <div class="field"><label for="coName" data-en="FULL NAME" data-ar="الاسم الكامل">FULL NAME</label>
+          <input id="coName" required autocomplete="name" data-en-ph="As printed on your ID" data-ar-ph="كما في هويتك"><span class="field-err" data-en="Required" data-ar="مطلوب">Required</span></div>
+        <div class="field"><label for="coPhone" data-en="PHONE" data-ar="رقم الهاتف">PHONE</label>
+          <input id="coPhone" required inputmode="tel" data-validate="phone" placeholder="+966 5X XXX XXX"><span class="field-err" data-en="Enter a valid phone number" data-ar="أدخل رقم هاتف صحيحاً">Enter a valid phone number</span></div>
+        <div class="field full"><label for="coEmail" data-en="EMAIL" data-ar="البريد الإلكتروني">EMAIL</label>
+          <input id="coEmail" required inputmode="email" data-validate="email" placeholder="name@domain.com"><span class="field-err" data-en="Enter a valid email address" data-ar="أدخل بريداً إلكترونياً صحيحاً">Enter a valid email address</span></div>
+        <div class="field"><label for="coCountry" data-en="COUNTRY" data-ar="الدولة">COUNTRY</label>
+          <input id="coCountry" required autocomplete="country-name"><span class="field-err" data-en="Required" data-ar="مطلوب">Required</span></div>
+        <div class="field"><label for="coCity" data-en="CITY" data-ar="المدينة">CITY</label>
+          <input id="coCity" required autocomplete="address-level2"><span class="field-err" data-en="Required" data-ar="مطلوب">Required</span></div>
+        <div class="field full"><label for="coAddress" data-en="ADDRESS" data-ar="العنوان">ADDRESS</label>
+          <input id="coAddress" required autocomplete="street-address" data-en-ph="Street, building, apartment" data-ar-ph="الشارع، المبنى، الشقة"><span class="field-err" data-en="Required" data-ar="مطلوب">Required</span></div>
+        <div class="field full"><label for="coNotes" data-en="NOTES" data-ar="ملاحظات">NOTES</label>
+          <textarea id="coNotes" data-en-ph="Delivery notes, engraving requests…" data-ar-ph="ملاحظات التسليم، طلبات النقش…"></textarea></div>
+        <div class="form-foot">
+          <button class="btn btn-solid" type="submit" data-en="CONFIRM ORDER" data-ar="تأكيد الطلب">CONFIRM ORDER</button>
+          <button class="btn" type="button" id="coBack" data-en="BACK TO CART" data-ar="العودة إلى السلة">BACK TO CART</button>
+        </div>
+      </form>
+      <aside class="co-summary">
+        <h4 class="co-sum-title mono" data-en="ORDER SUMMARY" data-ar="ملخص الطلب">ORDER SUMMARY</h4>
+        <ul class="co-items" id="coItems"></ul>
+        <div class="totals">
+          <div class="t-row"><span data-en="SUBTOTAL" data-ar="المجموع الفرعي">SUBTOTAL</span><span class="t-val" id="coSub"></span></div>
+          <div class="t-row"><span data-en="SHIPPING" data-ar="التوصيل">SHIPPING</span><span class="t-val" id="coShip"></span></div>
+          <div class="t-row grand"><span data-en="TOTAL" data-ar="الإجمالي">TOTAL</span><span class="t-val" id="coTotal"></span></div>
+        </div>
+        <p class="co-note" data-en="Orders are reviewed by the concierge before dispatch. Insured delivery — complimentary above SAR 1,000." data-ar="تُراجع الطلبات يدوياً قبل الشحن. توصيل مؤمّن — مجاني فوق 1,000 ر.س.">Orders are reviewed by the concierge before dispatch. Insured delivery — complimentary above SAR 1,000.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="sec contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <header class="sec-head reveal">
+        <p class="sec-label"><span class="mono">13</span><span class="sec-rule"></span><span data-en="CONTACT" data-ar="التواصل">CONTACT</span></p>
+        <h2 class="sec-title"><span data-en="CONTACT" data-ar="تواصل">CONTACT</span><span data-en="ALMO." data-ar="مع ألـمو.">ALMO.</span></h2>
+      </header>
+      <p class="reveal" data-en="Direct correspondence is answered within two business days. Our live channels are announced on social platforms — the links below are placeholders until then." data-ar="يتم الرد على المراسلات المباشرة خلال يومي عمل. تُعلن قنواتنا الرسمية على المنصات الاجتماعية — الروابط أدناه مؤقتة حتى ذلك الحين.">Direct correspondence is answered within two business days. Our live channels are announced on social platforms — the links below are placeholders until then.</p>
+      <ul class="socials reveal">
+        <li><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg><span data-en="INSTAGRAM" data-ar="إنستغرام">INSTAGRAM</span></a></li>
+        <li><a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4l16 16M20 4L4 20"/></svg><span data-en="X" data-ar="إكس">X</span></a></li>
+        <li><a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8.5 8v11.5M13 8v11.5M13 13.2a3.5 3.5 0 0 1 7 0v6.3"/><circle cx="8.5" cy="5.2" r="1.1" fill="currentColor" stroke="none"/></svg><span data-en="LINKEDIN" data-ar="لينكدإن">LINKEDIN</span></a></li>
+        <li><a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14.5 4v9.7a4.1 4.1 0 1 1-3.2-4"/><path d="M14.5 4c.4 2.3 2 3.9 4.5 4.2"/></svg><span data-en="TIKTOK" data-ar="تيك توك">TIKTOK</span></a></li>
+        <li><a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6.5" width="18" height="11" rx="3.5"/><path d="M10.5 10v4l4-2z" fill="currentColor" stroke="none"/></svg><span data-en="YOUTUBE" data-ar="يوتيوب">YOUTUBE</span></a></li>
+        <li><a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9.3 8.4c-.3.4-.5 1-.2 1.8.6 1.7 2 3.1 3.7 3.7.8.3 1.4.1 1.7-.2l.5-1.4-2-.9-.7.7c-.7-.4-1.3-1-1.7-1.7l.7-.7-.9-2-1.1.7z"/></svg><span data-en="WHATSAPP" data-ar="واتساب">WHATSAPP</span></a></li>
+      </ul>
+    </div>
+    <form class="contact-form form reveal" id="contactForm" novalidate>
+      <div class="field"><label for="ctName" data-en="NAME" data-ar="الاسم">NAME</label>
+        <input id="ctName" required data-en-ph="Your full name" data-ar-ph="اسمك الكامل"><span class="field-err" data-en="Required" data-ar="مطلوب">Required</span></div>
+      <div class="field"><label for="ctEmail" data-en="EMAIL" data-ar="البريد الإلكتروني">EMAIL</label>
+        <input id="ctEmail" required data-validate="email" placeholder="name@domain.com"><span class="field-err" data-en="Enter a valid email address" data-ar="أدخل بريداً إلكترونياً صحيحاً">Enter a valid email address</span></div>
+      <div class="field full"><label for="ctPhone" data-en="PHONE" data-ar="الهاتف">PHONE</label>
+        <input id="ctPhone" data-validate="phone" placeholder="+966 5X XXX XXX"><span class="field-err" data-en="Enter a valid phone number" data-ar="أدخل رقم هاتف صحيحاً">Enter a valid phone number</span></div>
+      <div class="field full"><label for="ctMsg" data-en="MESSAGE" data-ar="الرسالة">MESSAGE</label>
+        <textarea id="ctMsg" required data-en-ph="Tell us what you are looking for…" data-ar-ph="أخبرنا عمّا تبحث عنه…"></textarea><span class="field-err" data-en="Required" data-ar="مطلوب">Required</span></div>
+      <div class="form-foot">
+        <button class="btn btn-solid" type="submit" data-en="SEND MESSAGE" data-ar="إرسال الرسالة">SEND MESSAGE</button>
+        <p class="form-ok" id="ctOk" hidden data-en="Message received. The concierge replies within two business days." data-ar="تم استلام رسالتك. يرد الفريق خلال يومي عمل.">Message received. The concierge replies within two business days.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="footer" class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img class="foot-logo" loading="lazy"
+          src="https://z-cdn-media.chatglm.cn/files/69b74e30-bba9-4060-8417-5102d851aa4d.png?auth_key=1888474716-26ec9dbae30543d099764660a7d9703a-0-8ebe9119ba2c07e4c78ea590b8a6aa65"
+          alt="ALMO Prestige — brand mark">
+        <p class="foot-tag" data-en="Eyewear drafted like architecture. Engineered for prestige." data-ar="نظارات تُصمّم كما تُصمّم العمارة. صُممت للتميز.">Eyewear drafted like architecture. Engineered for prestige.</p>
+      </div>
+      <nav class="foot-col" aria-label="Explore">
+        <h4 class="mono" data-en="EXPLORE" data-ar="استكشف">EXPLORE</h4>
+        <a href="#eyewear" data-en="Eyewear" data-ar="النظارات">Eyewear</a>
+        <a href="#collections" data-en="Collections" data-ar="المجموعات">Collections</a>
+        <a href="#limited" data-en="Limited Edition" data-ar="الإصدارات المحدودة">Limited Edition</a>
+        <a href="#shop" data-en="The Catalogue" data-ar="الكتالوج">The Catalogue</a>
+      </nav>
+      <nav class="foot-col" aria-label="Maison">
+        <h4 class="mono" data-en="MAISON" data-ar="الدار">MAISON</h4>
+        <a href="#about" data-en="About ALMO" data-ar="من نحن">About ALMO</a>
+        <a href="#engineering" data-en="Engineering" data-ar="الهندسة">Engineering</a>
+        <a href="#gallery" data-en="Gallery" data-ar="المعرض">Gallery</a>
+        <a href="#gift-sets" data-en="Gift Sets" data-ar="أطقم الهدايا">Gift Sets</a>
+      </nav>
+      <form class="newsletter" id="newsForm" novalidate>
+        <h4 class="mono" data-en="THE REGISTER" data-ar="السجل">THE REGISTER</h4>
+        <p data-en="Private releases and restocks. No noise." data-ar="إصدارات خاصة وتجديدات متوفرة. بلا إزعاج.">Private releases and restocks. No noise.</p>
+        <div class="nl-field">
+          <input id="newsEmail" type="email" data-en-ph="Email address" data-ar-ph="بريدك الإلكتروني" placeholder="Email address">
+          <button type="submit" aria-label="Subscribe">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="nl-ok" id="newsOk" hidden data-en="Registered. Welcome to ALMO." data-ar="تم التسجيل. أهلاً بك في ألـمو.">Registered. Welcome to ALMO.</p>
+      </form>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 ALMO PRESTIGE</span>
+      <span data-en="ENGINEERED · PRECISE · PRESTIGIOUS" data-ar="مُهندس · دقيق · فاخر">ENGINEERED · PRECISE · PRESTIGIOUS</span>
+      <span>24.7136° N — 46.6753° E</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="page-overlay" id="pageOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart">
+  <header class="cart-head">
+    <h3 id="cartTitle">YOUR SELECTION</h3>
+    <button class="icon-btn" id="cartClose" aria-label="Close cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </header>
+  <div class="cart-items" id="cartItems"></div>
+  <footer class="cart-foot">
+    <div class="totals">
+      <div class="t-row"><span data-en="SUBTOTAL" data-ar="المجموع الفرعي">SUBTOTAL</span><span class="t-val" id="cartSub"></span></div>
+      <div class="t-row"><span data-en="SHIPPING" data-ar="التوصيل">SHIPPING</span><span class="t-val" id="cartShip"></span></div>
+      <p class="cart-ship-note" id="cartNote"></p>
+      <div class="t-row grand"><span data-en="TOTAL" data-ar="الإجمالي">TOTAL</span><span class="t-val" id="cartTotal"></span></div>
+    </div>
+    <div class="cart-actions">
+      <button class="btn btn-solid" id="cartCheckoutBtn" data-en="CHECKOUT" data-ar="إتمام الطلب">CHECKOUT</button>
+      <button class="btn" id="cartContinue" data-en="CONTINUE SHOPPING" data-ar="متابعة التسوق">CONTINUE SHOPPING</button>
+    </div>
+  </footer>
+</aside>
+
+<!-- ================= PRODUCT MODAL ================= -->
+<div class="modal" id="productModal" role="dialog" aria-modal="true" aria-label="Product details">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box product-box">
+    <button class="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="pm-media">
+      <img class="pm-main" id="pmMain" src="" alt="">
+      <div class="pm-thumbs" id="pmThumbs"></div>
+    </div>
+    <div class="pm-info">
+      <p class="pm-label mono" data-en="TECHNICAL FILE" data-ar="الملف الفني">TECHNICAL FILE</p>
+      <span class="pc-collection mono" id="pmCollection"></span>
+      <h3 class="pm-name" id="pmName"></h3>
+      <p class="pm-price" id="pmPrice"></p>
+      <p class="pm-desc" id="pmDesc"></p>
+      <dl class="pm-specs spec-list" id="pmSpecs"></dl>
+      <div class="pm-materials" id="pmMaterials">
+        <span class="mat-label mono" data-en="MATERIALS" data-ar="المواد">MATERIALS</span>
+        <p id="pmMatText"></p>
+      </div>
+      <p class="pm-stock" id="pmStock"></p>
+      <div class="pm-buy">
+        <div class="pm-qty">
+          <button id="pmMinus" aria-label="Decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16"/></svg></button>
+          <span id="pmQty">1</span>
+          <button id="pmPlus" aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v16M4 12h16"/></svg></button>
+        </div>
+        <button class="btn btn-solid" id="pmAdd" data-en="ADD TO CART" data-ar="أضف للسلة">ADD TO CART</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="modal lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="lb-stage">
+      <img id="lbImg" src="" alt="">
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="lb-cap"><span class="mono" id="lbCount"></span><span id="lbText"></span></div>
+  </div>
+</div>
+
+<!-- ================= ORDER CONFIRMATION ================= -->
+<div class="modal" id="confirmModal" role="dialog" aria-modal="true" aria-label="Order confirmation">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box confirm-box">
+    <svg class="stamp" viewBox="0 0 160 160" aria-hidden="true">
+      <defs><path id="stampCircle" d="M80 80 m-57 0 a57 57 0 1 1 114 0 a57 57 0 1 1 -114 0"/></defs>
+      <circle class="s-outer" cx="80" cy="80" r="70"/>
+      <circle class="s-inner" cx="80" cy="80" r="45"/>
+      <g class="s-spin"><text><textPath href="#stampCircle">ALMO PRESTIGE · ENGINEERED FOR PRESTIGE · CERTIFIED ·</textPath></text></g>
+      <text class="s-center" x="88" y="84" text-anchor="middle">ALMO</text>
+      <text class="s-csub" x="86" y="100" text-anchor="middle">CONFIRMED</text>
+    </svg>
+    <h3 data-en="ORDER CONFIRMED" data-ar="تم تأكيد طلبك">ORDER CONFIRMED</h3>
+    <p class="confirm-sub" data-en="A concierge will confirm your delivery window by phone." data-ar="سيؤكد فريق الاستقبال موعد التسليم هاتفياً.">A concierge will confirm your delivery window by phone.</p>
+    <dl class="cf-list">
+      <div class="cf-row"><dt data-en="ORDER NUMBER" data-ar="رقم الطلب">ORDER NUMBER</dt><dd id="cfOrder"></dd></div>
+      <div class="cf-row"><dt data-en="ITEMS" data-ar="المنتجات">ITEMS</dt><dd id="cfItems"></dd></div>
+      <div class="cf-row"><dt data-en="TOTAL" data-ar="الإجمالي">TOTAL</dt><dd id="cfTotal"></dd></div>
+      <div class="cf-row"><dt data-en="CUSTOMER" data-ar="العميل">CUSTOMER</dt><dd id="cfCustomer"></dd></div>
+      <div class="cf-row"><dt data-en="DELIVERY TO" data-ar="عنوان التسليم">DELIVERY TO</dt><dd id="cfAddress"></dd></div>
+    </dl>
+    <button class="btn btn-solid" id="cfContinue" data-en="CONTINUE" data-ar="متابعة">CONTINUE</button>
+  </div>
+</div>
+
+<div id="toastBox" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
